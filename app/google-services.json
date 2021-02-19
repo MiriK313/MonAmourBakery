@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "3732578499",
+    "project_id": "bakeryproject-46ccd",
+    "storage_bucket": "bakeryproject-46ccd.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:3732578499:android:063cec623cb49c85858276",
+        "android_client_info": {
+          "package_name": "com.example.monamourbakery"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "3732578499-180r400rliu2k1u9j2qiv3vd4fan0e31.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDlxAWuw1m_mHYLyVSbofq093AOO3e9m3c"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "3732578499-180r400rliu2k1u9j2qiv3vd4fan0e31.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
