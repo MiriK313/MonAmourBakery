@@ -1,5 +1,7 @@
 package com.example.monamourbakery;
 
+import java.util.ArrayList;
+
 public class User {
 
     private String userId;
@@ -7,6 +9,8 @@ public class User {
     private String password;
     private String firstName;
     private String lastName;
+
+    private ArrayList<Order> orders;
 
     public User(){}
 
@@ -20,6 +24,7 @@ public class User {
         this.password = password;
         this.firstName = firstName;
         this.lastName = lastName;
+        this.orders = new ArrayList<Order>();
     }
     public void setUserId(String userId) {
         this.userId = userId;
@@ -57,7 +62,17 @@ public class User {
         this.lastName = lastName;
     }
 
+    public ArrayList<Order> getOrders() {
+        return orders;
+    }
 
+    public void setOrders(ArrayList<Order> orders) {
+        this.orders = orders;
+    }
+
+    public void addOrder(Order order){
+        this.orders.add(order);
+    }
 
     @Override
     public String toString() {

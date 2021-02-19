@@ -3,16 +3,16 @@
 
     <item android:id="@+id/cart"
         android:icon="@drawable/cart_icon"
-        android:title="הזמנות"
+        android:title="הסל שלי"
         />
     <item android:id="@+id/add"
         android:icon="@drawable/add_icon"
         android:title="הזמנה חדשה"
         />
 
-    <item android:id="@+id/messages"
-        android:icon="@android:drawable/ic_dialog_email"
-        android:title="הודעות"
+    <item android:id="@+id/recipes"
+        android:icon="@drawable/recipe_icon"
+        android:title="מתכונים"
         />
 
 

@@ -10,6 +10,7 @@ import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 
+import com.google.android.material.button.MaterialButton;
 import com.google.android.material.textview.MaterialTextView;
 
 public class Fragment_AddSpecialProduct extends Fragment_Base {
@@ -33,6 +34,14 @@ public class Fragment_AddSpecialProduct extends Fragment_Base {
     //more requests
     private EditText special_request_TXT;
     private Product special_product;
+
+    private MaterialButton special_continue_BTN;
+
+
+    private CallBack_Special callBack_special;
+    public void setCallBack_special(CallBack_Special _callBack_special){
+        this.callBack_special=_callBack_special;
+    }
 
 
 
@@ -72,7 +81,6 @@ public class Fragment_AddSpecialProduct extends Fragment_Base {
         });
 
         special_kosher_RDG.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
-
             @Override
             public void onCheckedChanged (RadioGroup group,int checkedId){
 
@@ -103,6 +111,15 @@ public class Fragment_AddSpecialProduct extends Fragment_Base {
                     Log.d("DDM", "Institute: yes delivery");
                     special_price_title_LBL.setText(special_price_title_LBL.getText()+"300");
                     special_delivery_address_TXT.setVisibility(View.VISIBLE);
+                }
+            }
+        });
+
+        special_continue_BTN.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(callBack_special!=null){
+                    callBack_special.addSpecial();
                 }
             }
         });
@@ -150,6 +167,8 @@ public class Fragment_AddSpecialProduct extends Fragment_Base {
         special_price_title_LBL=view.findViewById(R.id.special_price_title_LBL);
         //more requests
         special_request_TXT=view.findViewById(R.id.special_request_TXT);
+
+        special_continue_BTN= view.findViewById(R.id.special_continue_BTN);
 
     }
 }

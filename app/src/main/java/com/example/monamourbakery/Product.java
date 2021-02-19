@@ -41,4 +41,12 @@ public class Product extends Pastry {
         this.type = type;
     }
 
+    @Override
+    public String toString() {
+        return "Product{" +
+                "price=" + price +
+                ", size=" + size +
+                ", type=" + type +
+                '}'+"\n";
+    }
 }
