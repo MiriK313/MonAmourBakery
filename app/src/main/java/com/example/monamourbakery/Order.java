@@ -7,8 +7,8 @@ public class Order {
 
     private static final Double DELIVERY_PRICE=30.0;
 
-    private String orderID;
-    private ArrayList<Product> products;
+    private int orderID;
+    private ArrayList<Product> products = new ArrayList<>();
     private Status eStatus;
     private String address;
     private Date date;
@@ -16,7 +16,7 @@ public class Order {
 
     public Order(){}
 
-    public Order(String orderID, ArrayList<Product> products, Status eStatus, String address, Date date, Double totalPrice) {
+    public Order(int orderID, ArrayList<Product> products, Status eStatus, String address, Date date, Double totalPrice) {
         this.orderID = orderID;
         this.products = products;
         this.eStatus = eStatus;
@@ -29,11 +29,11 @@ public class Order {
         return DELIVERY_PRICE;
     }
 
-    public String getOrderID() {
+    public int getOrderID() {
         return orderID;
     }
 
-    public void setOrderID(String orderID) {
+    public void setOrderID(int orderID) {
         this.orderID = orderID;
     }
 
@@ -43,6 +43,10 @@ public class Order {
 
     public void setProducts(ArrayList<Product> products) {
         this.products = products;
+    }
+
+    public void addProduct(Product product){
+        this.products.add(product);
     }
 
     public Status geteStatus() {
@@ -73,8 +77,28 @@ public class Order {
         return totalPrice;
     }
 
-    public void setTotalPrice(Double totalPrice) {
-        this.totalPrice = totalPrice;
+    public void setTotalPrice() {
+        for (int i = 0; i < products.size() ; i++) {
+            this.totalPrice += products.get(i).getPrice();
+        }
+        if(address!=null){
+            this.totalPrice += 30;
+        }
     }
 
+
+
+
+
+    @Override
+    public String toString() {
+        return "Order{" +
+                "orderID=" + orderID +
+                ", products=" + products.size() +
+                ", eStatus=" + eStatus +
+                ", address='" + address + '\'' +
+                ", date=" + date +
+                ", totalPrice=" + totalPrice +
+                '}';
+    }
 }

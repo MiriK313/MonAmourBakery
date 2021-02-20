@@ -10,8 +10,8 @@ public class Product extends Pastry {
 
     }
 
-    public Product (String name, Kosher kosher, String short_decription,double price,Size size, Type type, String pastry_img){
-        super(name,short_decription,kosher,pastry_img);
+    public Product (String name, Kosher kosher, String short_description,double price,Size size, Type type, String pastry_img){
+        super(name,short_description,kosher,pastry_img);
         this.price=price;
         this.size=size;
         this.type=type;
@@ -43,7 +43,7 @@ public class Product extends Pastry {
 
     @Override
     public String toString() {
-        return "Product{" +
+        return "Product{" +super.toString()+
                 "price=" + price +
                 ", size=" + size +
                 ", type=" + type +

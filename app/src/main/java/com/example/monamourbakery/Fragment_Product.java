@@ -1,6 +1,7 @@
 package com.example.monamourbakery;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -35,7 +36,9 @@ public class Fragment_Product extends Fragment_Base {
             public void onItemClick(View view, int position) {
                 Toast.makeText(view.getContext(), products.get(position).getPastry_name(), Toast.LENGTH_SHORT).show();
                 if(callBack_catalog!=null){
-                    callBack_catalog.addItem();
+                    product = products.get(position);
+                    Log.d("pttt",product.toString());
+                    callBack_catalog.addItem(product);
                 }
             }
 

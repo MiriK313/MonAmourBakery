@@ -5,12 +5,22 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import java.util.ArrayList;
+import java.util.Random;
 
 public class Activity_Main extends AppCompatActivity {
 
@@ -20,6 +30,7 @@ public class Activity_Main extends AppCompatActivity {
     private Fragment_AddNewProduct fragment_addNewProduct;
     private Fragment_AddSpecialProduct fragment_addSpecialProduct;
     private Fragment_Product fragment_product;
+    private Fragment_Cart fragment_cart;
 
     private BottomNavigationView bottomNav;
 
@@ -45,15 +56,20 @@ public class Activity_Main extends AppCompatActivity {
 
     private CallBack_Catalog callBack_catalog = new CallBack_Catalog() {
         @Override
-        public void addItem() {
+        public void addItem(Product product) {
             Log.d("pttt","Catalog --- added an item to order");
+            order.addProduct(product);
+            Log.d("pttt","Order - "+order.toString());
         }
     };
 
     private CallBack_Special callBack_special = new CallBack_Special() {
         @Override
-        public void addSpecial() {
+        public void addSpecial(Product product) {
             Log.d("pttt","Special --- added a special item to order");
+            order.addProduct(product);
+            Log.d("pttt","Order - "+order.toString());
+
         }
     };
 
@@ -65,6 +81,38 @@ public class Activity_Main extends AppCompatActivity {
         Log.d("pttt","isManager = "+getIntent().getBooleanExtra("isManager",false));
         findViews();
         initViews();
+        createOrder();
+    }
+
+    private void createOrder() {
+        this.order = new Order();
+        this.order.setOrderID(createID());
+    }
+
+    private int createID() {
+       int id = (int)((Math.random()+1000)+1);;
+        ArrayList<Order> allOrders = new ArrayList<>();
+        DatabaseReference db = FirebaseDatabase.getInstance().getReference();
+        db.child("Orders").addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for( DataSnapshot dataSnapshot : snapshot.getChildren()){
+                    Order order = dataSnapshot.getValue(Order.class);
+                    allOrders.add(order);
+                }
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+        if(allOrders.size()==0)
+            return id;
+        for (int i = 0; i < allOrders.size(); i++) {
+            if(id == allOrders.get(i).getOrderID())
+                id = (int)((Math.random()+1000)+1);
+        }
+        return id;
     }
 
     private void initViews() {
@@ -106,6 +154,10 @@ public class Activity_Main extends AppCompatActivity {
                     return true;
                 case R.id.cart:
                     Log.d("pttt","cart");
+                    fragment_cart = new Fragment_Cart();
+                    fragment_cart.setCurrentOrder(order);
+                    fragment = fragment_cart;
+                    loadFragment(fragment);
                     return true;
             }
             return false;

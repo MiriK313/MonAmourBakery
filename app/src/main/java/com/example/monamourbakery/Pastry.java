@@ -50,4 +50,12 @@ public class Pastry {
         this.pastry_img = pastry_img;
     }
 
+    @Override
+    public String toString() {
+        return "" +
+                "pastry_name='" + pastry_name + '\'' +
+                ", short_description='" + short_description + '\'' +
+                ", kosher=" + kosher +
+                ", pastry_img='" + pastry_img + '\'' ;
+    }
 }

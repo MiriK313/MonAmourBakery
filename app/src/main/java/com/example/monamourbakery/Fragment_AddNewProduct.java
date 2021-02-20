@@ -6,6 +6,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import androidx.fragment.app.Fragment;
+
 import com.google.android.material.button.MaterialButton;
 
 public class Fragment_AddNewProduct extends Fragment_Base {
@@ -19,7 +21,7 @@ public class Fragment_AddNewProduct extends Fragment_Base {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view= inflater.inflate(R.layout.fragment__add_new_product,container,false);
-        findviews(view);
+        findViews(view);
         initViews(view);
         return view;
     }
@@ -43,7 +45,7 @@ public class Fragment_AddNewProduct extends Fragment_Base {
         });
     }
 
-    private void findviews(View view) {
+    private void findViews(View view) {
         new_product_catalog_BTN=(MaterialButton)view.findViewById(R.id.new_product_catalog_BTN);
         new_product_creation_BTN=(MaterialButton)view.findViewById(R.id.new_product_creation_BTN);
     }

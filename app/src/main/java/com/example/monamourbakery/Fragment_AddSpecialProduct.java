@@ -1,4 +1,5 @@
 package com.example.monamourbakery;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -10,8 +11,17 @@ import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 
+import androidx.annotation.NonNull;
+
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.textview.MaterialTextView;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 public class Fragment_AddSpecialProduct extends Fragment_Base {
 
@@ -25,18 +35,14 @@ public class Fragment_AddSpecialProduct extends Fragment_Base {
     //kosher
     private RadioGroup special_kosher_RDG;
     private RadioButton special_kosher_button;
-    //delivery
-    private RadioGroup special_delivery_RDG;
-    private Button special_delivery_button;
-    private EditText special_delivery_address_TXT;
+
     //price
     private MaterialTextView special_price_title_LBL;
     //more requests
     private EditText special_request_TXT;
-    private Product special_product;
 
     private MaterialButton special_continue_BTN;
-
+    private FirebaseAuth mAuth =FirebaseAuth.getInstance();
 
     private CallBack_Special callBack_special;
     public void setCallBack_special(CallBack_Special _callBack_special){
@@ -48,8 +54,7 @@ public class Fragment_AddSpecialProduct extends Fragment_Base {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.activity_fragment__add_special_product, container, false);
-        special_product=new Product();
-        findviews(view);
+        findViews(view);
         initViews(view);
 
         return view;
@@ -57,26 +62,29 @@ public class Fragment_AddSpecialProduct extends Fragment_Base {
 
     private void initViews(View view) {
 
-        defineDefaultProduct(view);
+//        defineDefaultProduct(view);
         special_type_RDG.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
 
             @Override
             public void onCheckedChanged (RadioGroup group,int checkedId){
-                Log.d("chk", "id" + checkedId);
+                Log.d("DDM", "id" + checkedId);
 
                 if (checkedId == R.id.special_type_cake_RDG) {
-                    //clearDRP();
+                    clearDRP();
                     //setSelected("");
                     Log.d("DDM", "Institute: cake");
                     setDRP(R.raw.cake_types,R.raw.cake_flavors,R.raw.cake_sizes);
+                    product.setType(Type.CAKE);
 
                 } else if (checkedId == R.id.special_type_pack_RDG) {
-                    //clearDRP();
+                    clearDRP();
                     //setSelected("");
                     Log.d("DDM", "Institute: pack");
                     setDRP(R.raw.pack_types,R.raw.pack_flavors,R.raw.pack_sizes);
+                    product.setType(Type.PACK);
 
                 }
+
             }
         });
 
@@ -84,50 +92,43 @@ public class Fragment_AddSpecialProduct extends Fragment_Base {
             @Override
             public void onCheckedChanged (RadioGroup group,int checkedId){
 
-                Log.d("chk", "id" + checkedId);
+                Log.d("DDM", "id" + checkedId);
                 if (checkedId == R.id.special_kosher_milk_RD) {
                     Log.d("DDM", "Institute: milk");
+                    product.setKosher(Kosher.MILK);
                 } else if (checkedId == R.id.special_kosher_fur_RD) {
                     Log.d("DDM", "Institute: fur");
+                    product.setKosher(Kosher.FUR);
                 }
             }
         });
 
         if (special_request_TXT.getText()!=null) {
-            Log.d("chk", "בקשות מיוחדות " + special_request_TXT.getText());
+            Log.d("DDM", "בקשות מיוחדות " + special_request_TXT.getText());
+            product.setShort_description(special_request_TXT.getText().toString().trim());
         } else return;
 
-        special_delivery_RDG.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
 
-            @Override
-            public void onCheckedChanged (RadioGroup group,int checkedId){
-
-                Log.d("chk", "id" + checkedId);
-
-                if (checkedId == R.id.special_delivery_no_RDG) {
-                    Log.d("DDM", "Institute: no delivery");
-                    special_price_title_LBL.setText(special_price_title_LBL.getText());
-                } else if (checkedId == R.id.special_delivery_yes_RDG) {
-                    Log.d("DDM", "Institute: yes delivery");
-                    special_price_title_LBL.setText(special_price_title_LBL.getText()+"300");
-                    special_delivery_address_TXT.setVisibility(View.VISIBLE);
-                }
-            }
-        });
-
+        showPrice();
         special_continue_BTN.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if(callBack_special!=null){
-                    callBack_special.addSpecial();
+                    Log.d("pttt",product.toString());
+                    callBack_special.addSpecial(product);
+
                 }
             }
         });
 
     }
 
+    private void showPrice() {
 
- public void defineDefaultProduct(View view){
+    }
+
+
+    public void defineDefaultProduct(View view){
       //cake
      special_type_button=(RadioButton) view.findViewById(R.id.special_type_cake_RDG);
      special_type_button.performClick();
@@ -135,15 +136,15 @@ public class Fragment_AddSpecialProduct extends Fragment_Base {
      //check kosher
      special_kosher_button= (RadioButton) view.findViewById(R.id.special_kosher_milk_RD);
      special_kosher_button.performClick();
-     //delivery
-     special_delivery_button= (RadioButton) view.findViewById(R.id.special_delivery_no_RDG);
-     special_delivery_button.performClick();
+
 
  }
  public void setDRP(int typeResourceFile,int flavorResourceFile,int sizeResourceFile){
-     setFitDropDown(special_type_DRP,typeResourceFile);
-     setFitDropDown(special_flavor_DRP,flavorResourceFile);
-     setFitDropDown(special_size_DRP,sizeResourceFile);
+
+        setFitDropDown(special_type_DRP,typeResourceFile);
+        setFitDropDown(special_flavor_DRP,flavorResourceFile);
+        setFitDropDown(special_size_DRP,sizeResourceFile);
+
  }
 
  public void clearDRP(){
@@ -152,7 +153,9 @@ public class Fragment_AddSpecialProduct extends Fragment_Base {
      special_size_DRP.clearListSelection();
  }
 
-    private void findviews(View view) {
+    private void findViews(View view) {
+        //cake
+        special_type_button=(RadioButton) view.findViewById(R.id.special_type_cake_RDG);
         special_type_RDG=(RadioGroup)view.findViewById(R.id.special_type_RDG);
         special_type_DRP=view.findViewById(R.id.special_type_DRP);
         special_flavor_DRP=view.findViewById(R.id.special_flavor_DRP);
@@ -160,9 +163,8 @@ public class Fragment_AddSpecialProduct extends Fragment_Base {
         special_size_DRP=view.findViewById(R.id.special_size_DRP);
         //kosher
         special_kosher_RDG=view.findViewById(R.id.special_kosher_RDG);
-        //delivery
-        special_delivery_RDG=view.findViewById(R.id.special_delivery_RDG);
-        special_delivery_address_TXT=(EditText)view.findViewById(R.id.special_delivery_address_TXT);
+        //check kosher
+        special_kosher_button= (RadioButton) view.findViewById(R.id.special_kosher_milk_RD);
         //price
         special_price_title_LBL=view.findViewById(R.id.special_price_title_LBL);
         //more requests
