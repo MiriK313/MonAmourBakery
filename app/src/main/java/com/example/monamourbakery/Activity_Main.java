@@ -18,12 +18,17 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.gson.Gson;
 
 import java.util.ArrayList;
 import java.util.Random;
 
 public class Activity_Main extends AppCompatActivity {
 
+    private Gson gson = new Gson();
+    private FirebaseAuth mAuth;
+    private DatabaseReference db;
+    private User user;
     private Order order;
     private FragmentManager fragment_manager;
     private Fragment_Base fragment;
@@ -33,6 +38,8 @@ public class Activity_Main extends AppCompatActivity {
     private Fragment_Cart fragment_cart;
 
     private BottomNavigationView bottomNav;
+
+
 
     private CallBack_Add callBack_add = new CallBack_Add() {
         @Override
@@ -73,12 +80,29 @@ public class Activity_Main extends AppCompatActivity {
         }
     };
 
+    private CallBack_Order callBack_order = new CallBack_Order() {
+        @Override
+        public void addOrder(Order currentOrder) {
+            user.addOrder(currentOrder.getOrderID());
+            db = FirebaseDatabase.getInstance().getReference("myUsers");
+            db.child(user.getUserId()).setValue(user);
+            db = FirebaseDatabase.getInstance().getReference("Orders");
+            db.child(user.getUserId()).child(""+currentOrder.getOrderID()).setValue(currentOrder);
+            createOrder();
+            fragment_addNewProduct = new Fragment_AddNewProduct();
+            fragment_addNewProduct.setCallBack_add(callBack_add);
+            fragment = fragment_addNewProduct;
+            loadFragment(fragment);
+        }
+    };
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Log.d("pttt","isManager = "+getIntent().getBooleanExtra("isManager",false));
+        user = gson.fromJson(getIntent().getStringExtra("CurrentUser"),User.class);
         findViews();
         initViews();
         createOrder();
@@ -87,12 +111,13 @@ public class Activity_Main extends AppCompatActivity {
     private void createOrder() {
         this.order = new Order();
         this.order.setOrderID(createID());
+        this.order.setUserEmail(user.getEmail());
     }
 
     private int createID() {
-       int id = (int)((Math.random()+1000)+1);;
+       int id = (int)((Math.random()*1000)+1);;
         ArrayList<Order> allOrders = new ArrayList<>();
-        DatabaseReference db = FirebaseDatabase.getInstance().getReference();
+        db = FirebaseDatabase.getInstance().getReference();
         db.child("Orders").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -110,7 +135,7 @@ public class Activity_Main extends AppCompatActivity {
             return id;
         for (int i = 0; i < allOrders.size(); i++) {
             if(id == allOrders.get(i).getOrderID())
-                id = (int)((Math.random()+1000)+1);
+                id = (int)((Math.random()*1000)+1);
         }
         return id;
     }
@@ -156,6 +181,7 @@ public class Activity_Main extends AppCompatActivity {
                     Log.d("pttt","cart");
                     fragment_cart = new Fragment_Cart();
                     fragment_cart.setCurrentOrder(order);
+                    fragment_cart.setCallBack_order(callBack_order);
                     fragment = fragment_cart;
                     loadFragment(fragment);
                     return true;

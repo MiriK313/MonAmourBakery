@@ -10,6 +10,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 
@@ -38,8 +39,6 @@ public class Fragment_AddSpecialProduct extends Fragment_Base {
 
     //price
     private MaterialTextView special_price_title_LBL;
-    //more requests
-    private EditText special_request_TXT;
 
     private MaterialButton special_continue_BTN;
     private FirebaseAuth mAuth =FirebaseAuth.getInstance();
@@ -103,19 +102,19 @@ public class Fragment_AddSpecialProduct extends Fragment_Base {
             }
         });
 
-        if (special_request_TXT.getText()!=null) {
-            Log.d("DDM", "בקשות מיוחדות " + special_request_TXT.getText());
-            product.setShort_description(special_request_TXT.getText().toString().trim());
-        } else return;
 
-
-        showPrice();
         special_continue_BTN.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if(callBack_special!=null){
-                    Log.d("pttt",product.toString());
-                    callBack_special.addSpecial(product);
+                    if(checkProduct(product) == true){
+                        Log.d("pttt",product.toString());
+                        product.setPastry_img("");
+                        callBack_special.addSpecial(product);
+                    }
+                    else{
+                        Toast.makeText(v.getContext(), "Please Fill All Fields!!", Toast.LENGTH_SHORT).show();
+                    }
 
                 }
             }
@@ -123,8 +122,14 @@ public class Fragment_AddSpecialProduct extends Fragment_Base {
 
     }
 
-    private void showPrice() {
-
+    private boolean checkProduct(Product product) {
+        if (product.getPastry_name() == null)
+            return false;
+        if(product.getShort_description() == null)
+            return false;
+        if(product.getSize() == Size.NONE || product.getSize() == Size.NONE || product.getKosher() == Kosher.NONE)
+            return false;
+        return true;
     }
 
 
@@ -151,6 +156,9 @@ public class Fragment_AddSpecialProduct extends Fragment_Base {
      special_type_DRP.clearListSelection();
      special_flavor_DRP.clearListSelection();
      special_size_DRP.clearListSelection();
+     special_type_DRP.setText("");
+     special_flavor_DRP.setText("");
+     special_size_DRP.setText("");
  }
 
     private void findViews(View view) {
@@ -167,8 +175,6 @@ public class Fragment_AddSpecialProduct extends Fragment_Base {
         special_kosher_button= (RadioButton) view.findViewById(R.id.special_kosher_milk_RD);
         //price
         special_price_title_LBL=view.findViewById(R.id.special_price_title_LBL);
-        //more requests
-        special_request_TXT=view.findViewById(R.id.special_request_TXT);
 
         special_continue_BTN= view.findViewById(R.id.special_continue_BTN);
 

@@ -24,6 +24,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.gson.Gson;
 
 public class Activity_Login extends AppCompatActivity {
 
@@ -39,6 +40,7 @@ public class Activity_Login extends AppCompatActivity {
     private String passwordInput = "";
     private FirebaseAuth mAuth;
     private DatabaseReference db;
+    private Gson gson = new Gson();
 
 
     @Override
@@ -128,6 +130,7 @@ public class Activity_Login extends AppCompatActivity {
                         Intent intent = new Intent(Activity_Login.this, Activity_Main.class);
                         intent.putExtra("userId", ""+firebaseUser.getUid());
                         intent.putExtra("isManager", isManager);
+                        intent.putExtra("CurrentUser",gson.toJson(user));
 
                         startActivity(intent);
                         finish();

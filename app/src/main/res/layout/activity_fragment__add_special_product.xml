@@ -140,36 +140,7 @@
                 android:text="פרווה" />
         </RadioGroup>
 
-        <EditText
-            android:id="@+id/special_request_TXT"
-            style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.ExposedDropdownMenu"
-            android:layout_width="200dp"
-            android:layout_height="51dp"
-            android:gravity="center"
-            android:hint="בקשות מיוחדות"
-            android:inputType="text"
-            android:layoutDirection="rtl"
-            android:maxLength="100"
-            android:textColor="@color/black"
-            android:textColorHighlight="@color/white"
-            android:textDirection="rtl"
-           ></EditText>
 
-
-        <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/special_request_note_TXT"
-            style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:fontFamily="casual"
-            android:text="לדוגמא: עוגת נסיכות, הקדשה... "
-            android:textSize="10dp"
-            android:textStyle="bold"
-            android:textColor="#95FB0303"
-           >
-
-
-        </com.google.android.material.textview.MaterialTextView>
 
 
         <com.google.android.material.textview.MaterialTextView

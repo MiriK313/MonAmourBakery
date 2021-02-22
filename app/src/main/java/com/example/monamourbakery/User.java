@@ -10,7 +10,7 @@ public class User {
     private String firstName;
     private String lastName;
 
-    private ArrayList<Order> orders;
+    private ArrayList<Integer> orderIds = new ArrayList<>();
 
     public User(){}
 
@@ -24,7 +24,7 @@ public class User {
         this.password = password;
         this.firstName = firstName;
         this.lastName = lastName;
-        this.orders = new ArrayList<Order>();
+        this.orderIds = new ArrayList<Integer>();
     }
     public void setUserId(String userId) {
         this.userId = userId;
@@ -62,16 +62,16 @@ public class User {
         this.lastName = lastName;
     }
 
-    public ArrayList<Order> getOrders() {
-        return orders;
+    public ArrayList<Integer> getOrderIds() {
+        return orderIds;
     }
 
-    public void setOrders(ArrayList<Order> orders) {
-        this.orders = orders;
+    public void setOrderIds(ArrayList<Integer> orderIds) {
+        this.orderIds = orderIds;
     }
 
-    public void addOrder(Order order){
-        this.orders.add(order);
+    public void addOrder(int orderId){
+        this.orderIds.add(orderId);
     }
 
     @Override

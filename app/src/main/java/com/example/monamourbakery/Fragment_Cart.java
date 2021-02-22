@@ -29,7 +29,7 @@ import java.util.Date;
 public class Fragment_Cart extends Fragment_Base{
     public RecyclerView products_LST;
     private RadioGroup delivery_orders_GRP;
-    private Button delivery_button_orders_RDB;
+    private boolean flagChose = false;
     private MaterialTextView special_delivery_note_TXT;
     private DatePickerDialog datePickerDialog;
     private EditText date_EDT;
@@ -37,8 +37,12 @@ public class Fragment_Cart extends Fragment_Base{
     private TextView total_price_orders_LBL;
     private MaterialButton pay_orders_BTN;
 
+    private CallBack_Order callBack_order;
     private Order currentOrder;
 
+    public void setCallBack_order(CallBack_Order _callBack_order){
+        this.callBack_order = _callBack_order;
+    }
     public void setCurrentOrder(Order order){
         currentOrder=order;
     }
@@ -83,11 +87,13 @@ public class Fragment_Cart extends Fragment_Base{
                 Log.d("DDM", "id" + checkedId);
                 if (checkedId == R.id.delivery_yes_orders_RDB) {
                     special_delivery_note_TXT.setVisibility(View.VISIBLE);
-                    //TODO add the delivery order address
+                    currentOrder.setShipping(true);
+                    flagChose=true;
                     //TODO add delivery price to total price
                 } else if (checkedId == R.id.delivery_no_orders_RDB) {
                     Log.d("DDM", "Institute: no");
                     special_delivery_note_TXT.setVisibility(View.INVISIBLE);
+                    flagChose=true;
                 }
             }
         });
@@ -104,36 +110,51 @@ public class Fragment_Cart extends Fragment_Base{
                         new DatePickerDialog.OnDateSetListener() {
                             @Override
                             public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
-                                date_EDT.setText(dayOfMonth + "/" + (monthOfYear + 1) + "/" + year);
-                                Log.d("DDM", "Date: "+date_EDT.getText());
+                                if(dayOfMonth>day &&  (monthOfYear + 1)>=month && year>=year){
+                                    date_EDT.setText(dayOfMonth + "/" + (monthOfYear + 1) + "/" + year);
+                                    Log.d("DDM", "Date: "+date_EDT.getText());
+                                    currentOrder.setDate(date_EDT.getText().toString().trim());
+                                }else{
+                                    Toast.makeText(v.getContext(), "Please Choose a FUTURE DATE", Toast.LENGTH_SHORT).show();
+                                }
+
                             }
                         }, year, month, day);
                 datePickerDialog.show();
             }
         });
 
-//        int currentMonth = Calendar.getInstance().get(Calendar.MONTH)+1;
-//        int currentDay = Calendar.getInstance().get(Calendar.DAY_OF_MONTH);
-//        int currentYear = Calendar.getInstance().get(Calendar.YEAR);
-//        if (date_orders_calc.getDayOfMonth()>currentDay &&  date_orders_calc.getMonth()>=currentMonth && date_orders_calc.getYear()>=currentYear)
-//        {
-//            Log.d("pttt","Selected Date: "+ date_orders_calc.getDayOfMonth()+"/"
-//                    + (date_orders_calc.getMonth() + 1)+"/"+date_orders_calc.getYear());
-//        }
 
         pay_orders_BTN.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.d("DDM", "Institute: paid");
+                if(checkOrder(currentOrder)== true && checkGui()==true){
+                    Log.d("DDM", "Institute: paid");
+                    if(callBack_order!=null){
+                        callBack_order.addOrder(currentOrder);
+                    }
+                }
             }
         });
 
     }
 
-    private void findViews(View view) {
+    private boolean checkGui() {
+        if(flagChose==false || date_EDT.getText().toString().isEmpty() )
+            return false;
+        return true;
+    }
 
+    private boolean checkOrder(Order currentOrder) {
+        if(currentOrder.getProducts().size()==0)
+            return false;
+        return true;
+    }
+
+    private void findViews(View view) {
         delivery_orders_GRP=view.findViewById(R.id.delivery_orders_GRP);
         special_delivery_note_TXT=view.findViewById(R.id.special_delivery_note_TXT);
+        special_delivery_note_TXT.setVisibility(View.INVISIBLE);
         products_LST=view.findViewById(R.id.products_LST);
         //price
         date_EDT=(EditText) view.findViewById(R.id.date_EDT);

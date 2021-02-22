@@ -10,18 +10,20 @@ public class Order {
     private int orderID;
     private ArrayList<Product> products = new ArrayList<>();
     private Status eStatus;
-    private String address;
-    private Date date;
+    private Boolean shipping = false;
+    private String date;
     private Double totalPrice;
+    private String userEmail;
 
     public Order(){}
 
-    public Order(int orderID, ArrayList<Product> products, Status eStatus, String address, Date date, Double totalPrice) {
+    public Order(int orderID, ArrayList<Product> products, Status eStatus, Boolean shipping, String date, Double totalPrice,String userEmail) {
         this.orderID = orderID;
         this.products = products;
         this.eStatus = eStatus;
-        this.address = address;
+        this.shipping = shipping;
         this.date = date;
+        this.userEmail = userEmail;
         this.totalPrice = totalPrice;
     }
 
@@ -57,19 +59,27 @@ public class Order {
         this.eStatus = eStatus;
     }
 
-    public String getAddress() {
-        return address;
+    public String getUserEmail() {
+        return userEmail;
     }
 
-    public void setAddress(String address) {
-        this.address = address;
+    public void setUserEmail(String userEmail) {
+        this.userEmail = userEmail;
     }
 
-    public Date getDate() {
+    public Boolean getShipping() {
+        return shipping;
+    }
+
+    public void setShipping(Boolean shipping) {
+        this.shipping = shipping;
+    }
+
+    public String  getDate() {
         return date;
     }
 
-    public void setDate(Date date) {
+    public void setDate(String  date) {
         this.date = date;
     }
 
@@ -81,7 +91,7 @@ public class Order {
         for (int i = 0; i < products.size() ; i++) {
             this.totalPrice += products.get(i).getPrice();
         }
-        if(address!=null){
+        if(shipping == true){
             this.totalPrice += 30;
         }
     }
@@ -96,7 +106,7 @@ public class Order {
                 "orderID=" + orderID +
                 ", products=" + products.size() +
                 ", eStatus=" + eStatus +
-                ", address='" + address + '\'' +
+                ", shipping='" + shipping + '\'' +
                 ", date=" + date +
                 ", totalPrice=" + totalPrice +
                 '}';
