@@ -15,7 +15,8 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#A4E6D1F3"
+        android:background="@drawable/rounded"
+        android:backgroundTint="#92FFFFFF"
         android:textDirection="rtl">
         <TextView
             android:id="@+id/recipe_LBL_name"

@@ -52,20 +52,21 @@
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/products_LST"
             android:layout_width="wrap_content"
-            android:layout_height="120dp"
+            android:layout_height="290dp"
             android:layout_marginStart="4dp"
             android:layoutDirection="rtl"
             android:textDirection="rtl" />
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/rounded"
             android:gravity="center_horizontal"
+            android:layout_gravity="center_horizontal"
             android:layoutDirection="rtl"
-            android:layout_marginTop="30dp"
-            android:orientation="vertical"
-            android:padding="20dp"
-            >
+            android:padding="10dp"
+            android:orientation="vertical">
+
             <RadioGroup
                 android:id="@+id/delivery_orders_GRP"
                 android:layout_width="wrap_content"
@@ -84,59 +85,54 @@
                     android:layout_height="wrap_content"
                     android:text="איסוף עצמי" />
             </RadioGroup>
-            <EditText
-                android:id="@+id/delivery_address_orders_TXT"
-                style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.ExposedDropdownMenu"
-                android:layout_width="wrap_content"
-                android:layout_height="51dp"
-                android:gravity="center"
-                android:hint="כתובת למשלוח"
-                android:inputType="textPostalAddress"
-                android:layoutDirection="rtl"
-                android:maxLength="100"
-                android:textColor="@color/black"
-                android:textColorHighlight="@color/white"
-                android:textDirection="rtl"
-                android:visibility="invisible">
 
-            </EditText>
-            <DatePicker
-                android:id="@+id/date_orders_calc"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerHorizontal="true"
-                android:calendarTextColor="@color/white"
-                android:calendarViewShown="false"
-                android:datePickerMode="calendar" />
             <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/total_price_orders_LBL"
+                android:id="@+id/special_delivery_note_TXT"
                 style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:boxStrokeColor="@color/purple_200"
                 android:fontFamily="casual"
-                android:text="לתשלום: "
-                android:textSize="20dp"
+                android:text="ההזמנה תשלח למיקום בוא אתה נמצא"
+                android:textSize="10dp"
                 android:textStyle="bold"
-                android:layout_marginTop="10dp"
-                android:textColor="#95B429FF"
-                >
-            </com.google.android.material.textview.MaterialTextView>
+                android:textColor="#95FB0303"
+                ></com.google.android.material.textview.MaterialTextView>
+
+            <EditText
+                android:id="@+id/date_EDT"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:gravity="center"
+                android:hint="Enter Date" />
+
+            <TextView
+                android:id="@+id/total_price_orders_LBL"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:layout_weight="4"
+                android:ems="10"
+                android:gravity="center"
+                android:text="לתשלום: "
+                android:textColor="@color/purple_200"
+                android:textSize="20dp"
+                android:textStyle="bold" />
+
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/pay_orders_BTN"
                 style="@style/Widget.MaterialComponents.ExtendedFloatingActionButton.Icon"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+
+                android:background="@drawable/rounded"
                 android:text="הזמן"
                 android:textAlignment="center"
-                android:layout_marginTop="10dp"
-                app:cornerRadius="17dp"
                 android:textColor="#95B429FF"
-                android:textStyle="bold"
-                android:background="@drawable/rounded"
-                app:backgroundTint="@color/white"
                 android:textSize="20dp"
-                />
+                android:textStyle="bold"
+                app:backgroundTint="@color/white"
+                app:cornerRadius="17dp" />
 
         </LinearLayout>
     </LinearLayout>
