@@ -9,6 +9,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
@@ -83,6 +84,7 @@ public class Activity_Main extends AppCompatActivity {
     private CallBack_Order callBack_order = new CallBack_Order() {
         @Override
         public void addOrder(Order currentOrder) {
+            Toast.makeText(Activity_Main.this, "Order is Waiting to be Accepted", Toast.LENGTH_SHORT).show();
             user.addOrder(currentOrder.getOrderID());
             db = FirebaseDatabase.getInstance().getReference("myUsers");
             db.child(user.getUserId()).setValue(user);

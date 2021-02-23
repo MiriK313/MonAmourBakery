@@ -130,9 +130,14 @@ public class Fragment_Cart extends Fragment_Base{
             public void onClick(View v) {
                 if(checkOrder(currentOrder)== true && checkGui()==true){
                     Log.d("DDM", "Institute: paid");
+                    currentOrder.seteStatus(Status.WAITING);
                     if(callBack_order!=null){
                         callBack_order.addOrder(currentOrder);
                     }
+                }
+                else{
+                    Toast.makeText(v.getContext(), "Please Fill All Order Details!", Toast.LENGTH_SHORT).show();
+
                 }
             }
         });
