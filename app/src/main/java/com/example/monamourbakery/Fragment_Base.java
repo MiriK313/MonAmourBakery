@@ -20,7 +20,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Fragment_Base extends Fragment {
-    private String selected;
+    protected String selected;
 
     protected Product product = new Product();
 

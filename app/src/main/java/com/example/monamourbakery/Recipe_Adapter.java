@@ -54,12 +54,22 @@ public class Recipe_Adapter extends RecyclerView.Adapter<Recipe_Adapter.MyViewHo
         if(!Activity_Main.isManager){
             holder.recipe_BTN_delete.setVisibility(View.INVISIBLE);
         }
+        if(Activity_Main_Manager.isManager)
+            holder.recipe_BTN_delete.setVisibility(View.VISIBLE);
 
         holder.recipe_BTN_readMore.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (mClickListener != null) {
                     mClickListener.onReadMoreClicked(v, recipe);
+                }
+            }
+        });
+        holder.recipe_BTN_delete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (mClickListener != null) {
+                    mClickListener.onRemove(v, recipe);
                 }
             }
         });
@@ -85,6 +95,7 @@ public class Recipe_Adapter extends RecyclerView.Adapter<Recipe_Adapter.MyViewHo
     public interface MyItemClickListener {
         void onItemClick(View view, int position);
         void onReadMoreClicked(View view, Recipe recipe);
+        void onRemove(View view,Recipe recipe);
     }
 
 

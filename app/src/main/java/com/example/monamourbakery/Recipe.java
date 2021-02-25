@@ -36,6 +36,9 @@ public class Recipe extends Pastry {
     public void setIngredient(String quantity, String ingredient){
         this.ingredients.put(quantity,ingredient);
     }
+    public HashMap<String, String> getIngredients(){
+        return ingredients;
+    }
 
     public String getDescription() {
         return description;

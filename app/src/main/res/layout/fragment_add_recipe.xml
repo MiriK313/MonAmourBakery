@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Fragment_AddSpecialProduct">
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="centerCrop"
+        android:src="@drawable/splash_background_img" />
+
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:alpha="0.7"
+        android:src="@drawable/back_gradient" />
+
+    <RelativeLayout
+        android:id="@+id/relativeLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:alpha="0.0"
+        android:background="#000000"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/rounded"
+        android:gravity="center_horizontal"
+        android:layoutDirection="rtl"
+        android:orientation="vertical"
+        android:padding="20dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+
+        <EditText
+            android:id="@+id/cake_name_EDT"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="30"
+            android:gravity="center"
+            android:inputType="textPersonName"
+            android:text="שם העוגה" />
+
+        <EditText
+            android:id="@+id/short_description_EDT"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="100"
+            android:gravity="center"
+            android:inputType="textPersonName"
+            android:text="תיאור קצר" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/add_new_ingredient_LBL"
+            style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:boxStrokeColor="@color/purple_200"
+            android:fontFamily="casual"
+            android:text="הוספת רכיב חדש"
+            android:textSize="20dp"
+            android:textStyle="bold"
+            android:layout_marginTop="10dp"
+            android:textColor="#95B429FF"
+            >
+        </com.google.android.material.textview.MaterialTextView>
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/Widget.Custom.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+            android:layout_width="250dp"
+            android:layout_height="wrap_content">
+
+            <AutoCompleteTextView
+                android:id="@+id/ingredient_DRP"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="שם הרכיב"
+                android:inputType="none"
+                android:textSize="15dp" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/Widget.Custom.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+            android:layout_width="250dp"
+            android:layout_height="wrap_content">
+
+            <AutoCompleteTextView
+                android:id="@+id/sizes_DRP"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="יחידת מידה"
+                android:inputType="none"
+                android:layout_marginTop="20dp"
+                android:ems="10"
+                android:textSize="15dp"
+                />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/Widget.Custom.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+            android:layout_width="250dp"
+            android:layout_height="wrap_content">
+
+            <AutoCompleteTextView
+                android:id="@+id/amounts_DRP"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:hint="כמות"
+                android:inputType="none"
+                android:ems="10"
+                android:textSize="15dp"
+                />
+
+        </com.google.android.material.textfield.TextInputLayout>
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/add_new_ingredient_BTN"
+            style="@style/Widget.MaterialComponents.Button.TextButton"
+            android:layout_width="35dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerInParent="true"
+            app:icon="@drawable/add"
+            app:iconSize="30dp"
+            app:iconTint="@color/purple_700"
+            app:iconGravity="textStart" />
+
+
+        <RadioGroup
+            android:id="@+id/kosher_RDG"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <RadioButton
+                android:id="@+id/kosher_milk_RD"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="חלבי" />
+
+            <RadioButton
+                android:id="@+id/kosher_fur_RD"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="פרווה" />
+        </RadioGroup>
+        <EditText
+            android:id="@+id/description_EDT"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="100"
+            android:gravity="center"
+            android:inputType="textPersonName"
+            android:text="אופן הכנה" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/add_recipe_BTN"
+            style="@style/Widget.MaterialComponents.ExtendedFloatingActionButton.Icon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="הוסף מתכון"
+            android:textAlignment="center"
+            android:layout_marginTop="10dp"
+            app:cornerRadius="17dp"
+            android:textColor="#95B429FF"
+            android:textStyle="bold"
+            android:background="@drawable/rounded"
+            app:backgroundTint="@color/white"
+            android:textSize="20dp"
+            />
+    </LinearLayout>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

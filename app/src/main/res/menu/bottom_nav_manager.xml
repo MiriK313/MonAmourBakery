@@ -5,7 +5,7 @@
         android:icon="@drawable/cart_icon"
         android:title="הזמנות"
         />
-    <item android:id="@+id/add"
+    <item android:id="@+id/products"
         android:icon="@drawable/add_icon"
         android:title="מוצרים"
         />

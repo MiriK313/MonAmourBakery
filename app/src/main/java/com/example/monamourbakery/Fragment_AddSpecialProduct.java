@@ -61,7 +61,6 @@ public class Fragment_AddSpecialProduct extends Fragment_Base {
 
     private void initViews(View view) {
 
-//        defineDefaultProduct(view);
         updatePrice();
         special_type_RDG.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
 
@@ -149,17 +148,6 @@ public class Fragment_AddSpecialProduct extends Fragment_Base {
     }
 
 
-    public void defineDefaultProduct(View view){
-      //cake
-     special_type_button=(RadioButton) view.findViewById(R.id.special_type_cake_RDG);
-     special_type_button.performClick();
-     setDRP(R.raw.cake_types,R.raw.cake_flavors,R.raw.cake_sizes);
-     //check kosher
-     special_kosher_button= (RadioButton) view.findViewById(R.id.special_kosher_milk_RD);
-     special_kosher_button.performClick();
-
-
- }
  public void setDRP(int typeResourceFile,int flavorResourceFile,int sizeResourceFile){
 
         setFitDropDown(special_type_DRP,typeResourceFile);

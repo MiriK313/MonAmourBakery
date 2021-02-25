@@ -20,4 +20,16 @@
             android:textDirection="rtl" />
     </LinearLayout>
 
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/recipe_BTN_add"
+        style="@style/Widget.MaterialComponents.Button.TextButton"
+        android:layout_width="35dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerInParent="true"
+        app:icon="@drawable/add"
+        app:iconSize="30dp"
+        app:iconTint="@color/purple_700"
+        app:iconGravity="textStart"
+        android:visibility="invisible"/>
 </RelativeLayout>
