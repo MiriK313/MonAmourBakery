@@ -38,17 +38,6 @@ public class Recipe_Adapter extends RecyclerView.Adapter<Recipe_Adapter.MyViewHo
 
 
 
-
-    /*
-    movie_IMG_cover
-    movie_IMG_star
-    main_BTN_readMore
-    movie_LBL_actors
-    movie_LBL_content
-    movie_LBL_year
-    movie_LBL_name
-     */
-
     // binds the data to the TextView in each row
     @Override
     public void onBindViewHolder(MyViewHolder holder, int position) {
@@ -56,11 +45,15 @@ public class Recipe_Adapter extends RecyclerView.Adapter<Recipe_Adapter.MyViewHo
         Recipe recipe = recipes.get(position);
         holder.recipe_LBL_name.setText(recipe.getPastry_name());
         holder.recipe_LBL_kosher.setText("" + recipe.getKosher());
-        holder.recipe_LBL_short_discription.setText(recipe.getShort_description());
+        holder.recipe_LBL_short_description.setText(recipe.getShort_description());
         Glide.with(mInflater.getContext())
                 .load(recipe.getPastry_img())
                 .centerCrop()
                 .into(holder.recipe_IMG);
+
+        if(!Activity_Main.isManager){
+            holder.recipe_BTN_delete.setVisibility(View.INVISIBLE);
+        }
 
         holder.recipe_BTN_readMore.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -101,17 +94,19 @@ public class Recipe_Adapter extends RecyclerView.Adapter<Recipe_Adapter.MyViewHo
 
         TextView recipe_LBL_name;
         TextView recipe_LBL_kosher;
-        TextView recipe_LBL_short_discription;
+        TextView recipe_LBL_short_description;
         ShapeableImageView recipe_IMG;
         MaterialButton recipe_BTN_readMore;
+        MaterialButton recipe_BTN_delete;
 
         MyViewHolder(View itemView) {
             super(itemView);
             recipe_LBL_name = itemView.findViewById(R.id.recipe_LBL_name);
             recipe_LBL_kosher = itemView.findViewById(R.id.recipe_LBL_kosher);
-            recipe_LBL_short_discription = itemView.findViewById(R.id.recipe_LBL_short_discription);
+            recipe_LBL_short_description = itemView.findViewById(R.id.recipe_LBL_short_discription);
             recipe_IMG = itemView.findViewById(R.id.recipe_IMG);
             recipe_BTN_readMore = itemView.findViewById(R.id.recipe_BTN_readMore);
+            recipe_BTN_delete = itemView.findViewById(R.id.recipe_BTN_delete);
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override

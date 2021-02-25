@@ -56,28 +56,34 @@ public class Fragment_Base extends Fragment {
                     if( selected.equals("קוטר 16")){
                         product.setSize(Size.S);
                         Log.d("DDM", "Institute: S, "+product.getSize());
+                        product.setPrice(260);
                     }
                     else if( selected.equals("קוטר 18")  ){
                         product.setSize(Size.M);
                         Log.d("DDM", "Institute: M, "+product.getSize());
+                        product.setPrice(320);
                     }
                     else if( selected.equals("קוטר 20")  ){
                         product.setSize(Size.L);
                         Log.d("DDM", "Institute: L, "+product.getSize());
+                        product.setPrice(380);
                     }
                 }
                 else if (resourceFile == R.raw.pack_sizes ) {
                     if( selected.equals("6 יחידות")){
                         product.setSize(Size.S);
                         Log.d("DDM", "Institute: S, "+product.getSize());
+                        product.setPrice(160);
                     }
                     else if( selected.equals("8 יחידות") ){
                         product.setSize(Size.M);
                         Log.d("DDM", "Institute: M, "+product.getSize());
+                        product.setPrice(220);
                     }
                     else if( selected.equals("12 יחידות") ){
                         product.setSize(Size.L);
                         Log.d("DDM", "Institute: L, "+product.getSize());
+                        product.setPrice(280);
                     }
                 }
                 else if( resourceFile==R.raw.cake_types ||resourceFile==R.raw.pack_types ){

@@ -37,6 +37,7 @@ public class Activity_Main extends AppCompatActivity {
     private Fragment_AddSpecialProduct fragment_addSpecialProduct;
     private Fragment_Product fragment_product;
     private Fragment_Cart fragment_cart;
+    public static boolean isManager;
 
     private BottomNavigationView bottomNav;
 
@@ -104,6 +105,7 @@ public class Activity_Main extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Log.d("pttt","isManager = "+getIntent().getBooleanExtra("isManager",false));
+        isManager = getIntent().getBooleanExtra("isManager",false);
         user = gson.fromJson(getIntent().getStringExtra("CurrentUser"),User.class);
         findViews();
         initViews();

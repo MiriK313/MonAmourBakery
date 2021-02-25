@@ -28,9 +28,7 @@ import java.util.Date;
 
 public class Fragment_Cart extends Fragment_Base{
     public RecyclerView products_LST;
-    private RadioGroup delivery_orders_GRP;
     private boolean flagChose = false;
-    private MaterialTextView special_delivery_note_TXT;
     private DatePickerDialog datePickerDialog;
     private EditText date_EDT;
     //price
@@ -80,23 +78,7 @@ public class Fragment_Cart extends Fragment_Base{
     }
 
     private void initViews(View view) {
-        delivery_orders_GRP.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged (RadioGroup group,int checkedId){
-
-                Log.d("DDM", "id" + checkedId);
-                if (checkedId == R.id.delivery_yes_orders_RDB) {
-                    special_delivery_note_TXT.setVisibility(View.VISIBLE);
-                    currentOrder.setShipping(true);
-                    flagChose=true;
-                    //TODO add delivery price to total price
-                } else if (checkedId == R.id.delivery_no_orders_RDB) {
-                    Log.d("DDM", "Institute: no");
-                    special_delivery_note_TXT.setVisibility(View.INVISIBLE);
-                    flagChose=true;
-                }
-            }
-        });
+        updatePrice();
         date_EDT.setInputType(InputType.TYPE_NULL);
         date_EDT.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -123,8 +105,6 @@ public class Fragment_Cart extends Fragment_Base{
                 datePickerDialog.show();
             }
         });
-
-
         pay_orders_BTN.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -144,6 +124,11 @@ public class Fragment_Cart extends Fragment_Base{
 
     }
 
+    private void updatePrice() {
+        if(checkOrder(currentOrder)== true)
+            total_price_orders_LBL.setText("לתשלום: "+currentOrder.getTotalPrice());
+    }
+
     private boolean checkGui() {
         if(flagChose==false || date_EDT.getText().toString().isEmpty() )
             return false;
@@ -157,9 +142,7 @@ public class Fragment_Cart extends Fragment_Base{
     }
 
     private void findViews(View view) {
-        delivery_orders_GRP=view.findViewById(R.id.delivery_orders_GRP);
-        special_delivery_note_TXT=view.findViewById(R.id.special_delivery_note_TXT);
-        special_delivery_note_TXT.setVisibility(View.INVISIBLE);
+
         products_LST=view.findViewById(R.id.products_LST);
         //price
         date_EDT=(EditText) view.findViewById(R.id.date_EDT);

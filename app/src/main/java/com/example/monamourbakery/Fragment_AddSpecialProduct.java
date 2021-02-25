@@ -67,7 +67,7 @@ public class Fragment_AddSpecialProduct extends Fragment_Base {
             @Override
             public void onCheckedChanged (RadioGroup group,int checkedId){
                 Log.d("DDM", "id" + checkedId);
-
+                updatePrice();
                 if (checkedId == R.id.special_type_cake_RDG) {
                     clearDRP();
                     //setSelected("");
@@ -81,7 +81,6 @@ public class Fragment_AddSpecialProduct extends Fragment_Base {
                     Log.d("DDM", "Institute: pack");
                     setDRP(R.raw.pack_types,R.raw.pack_flavors,R.raw.pack_sizes);
                     product.setType(Type.PACK);
-
                 }
 
             }
@@ -90,7 +89,7 @@ public class Fragment_AddSpecialProduct extends Fragment_Base {
         special_kosher_RDG.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged (RadioGroup group,int checkedId){
-
+                updatePrice();
                 Log.d("DDM", "id" + checkedId);
                 if (checkedId == R.id.special_kosher_milk_RD) {
                     Log.d("DDM", "Institute: milk");
@@ -99,17 +98,21 @@ public class Fragment_AddSpecialProduct extends Fragment_Base {
                     Log.d("DDM", "Institute: fur");
                     product.setKosher(Kosher.FUR);
                 }
+
             }
         });
 
-
+        updatePrice();
         special_continue_BTN.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                updatePrice();
                 if(callBack_special!=null){
                     if(checkProduct(product) == true){
                         Log.d("pttt",product.toString());
                         product.setPastry_img("");
+                        Toast.makeText(v.getContext(), "Product has been Added!!", Toast.LENGTH_SHORT).show();
+
                         callBack_special.addSpecial(product);
                     }
                     else{
@@ -120,6 +123,19 @@ public class Fragment_AddSpecialProduct extends Fragment_Base {
             }
         });
 
+    }
+
+    private void updatePrice() {
+
+        if(!special_type_DRP.getText().toString().isEmpty() &&
+            !special_flavor_DRP.getText().toString().isEmpty() &&
+            !special_type_DRP.getText().toString().isEmpty()){
+            special_price_title_LBL.setText("מחיר : "+product.getPrice()+"שח ");
+
+        }
+        if(!checkProduct(product)){
+            special_price_title_LBL.setText("מחיר : "+product.getPrice()+"שח ");
+        }
     }
 
     private boolean checkProduct(Product product) {
@@ -159,6 +175,9 @@ public class Fragment_AddSpecialProduct extends Fragment_Base {
      special_type_DRP.setText("");
      special_flavor_DRP.setText("");
      special_size_DRP.setText("");
+     special_kosher_RDG.clearCheck();
+     special_price_title_LBL.setText("מחיר : "+0.0+"שח ");
+
  }
 
     private void findViews(View view) {

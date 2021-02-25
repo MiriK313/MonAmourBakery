@@ -67,36 +67,6 @@
             android:padding="10dp"
             android:orientation="vertical">
 
-            <RadioGroup
-                android:id="@+id/delivery_orders_GRP"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-                <RadioButton
-                    android:id="@+id/delivery_yes_orders_RDB"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="משלוח" />
-
-                <RadioButton
-                    android:id="@+id/delivery_no_orders_RDB"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="איסוף עצמי" />
-            </RadioGroup>
-
-            <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/special_delivery_note_TXT"
-                style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:fontFamily="casual"
-                android:text="ההזמנה תשלח למיקום בוא אתה נמצא"
-                android:textSize="10dp"
-                android:textStyle="bold"
-                android:textColor="#95FB0303"
-                ></com.google.android.material.textview.MaterialTextView>
 
             <EditText
                 android:id="@+id/date_EDT"

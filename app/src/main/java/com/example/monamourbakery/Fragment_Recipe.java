@@ -10,17 +10,21 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.material.button.MaterialButton;
+
 import java.util.ArrayList;
 
 public class Fragment_Recipe extends Fragment_Base {
 
-    public RecyclerView fragment_recipies_LST;
+    public RecyclerView fragment_recipes_LST;
+
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view= inflater.inflate(R.layout.fragment_recipe_list,container,false);
-        findviews(view);
+        findViews(view);
         ArrayList<Recipe> recipes = RecipeMockDB.generateRecipes();
 //        Log.d("pttt",  recipes.toArray().toString());
 
@@ -39,14 +43,16 @@ public class Fragment_Recipe extends Fragment_Base {
         });
         ;
 
-        fragment_recipies_LST.setLayoutManager(new LinearLayoutManager(view.getContext()));
-        fragment_recipies_LST.setAdapter(recipe_adapter);
+        fragment_recipes_LST.setLayoutManager(new LinearLayoutManager(view.getContext()));
+        fragment_recipes_LST.setAdapter(recipe_adapter);
 
         return view;
     }
 
-    public void findviews(View view) {
-        this.fragment_recipies_LST=view.findViewById(R.id.fragment_recipies_LST);
+
+
+    public void findViews(View view) {
+        fragment_recipes_LST=view.findViewById(R.id.fragment_recipies_LST);
 
     }
 

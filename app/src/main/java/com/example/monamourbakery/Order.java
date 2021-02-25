@@ -10,18 +10,16 @@ public class Order {
     private int orderID;
     private ArrayList<Product> products = new ArrayList<>();
     private Status eStatus;
-    private Boolean shipping = false;
     private String date;
-    private Double totalPrice;
+    private Double totalPrice = 0.0;
     private String userEmail;
 
-    public Order(){}
+    public Order(){ }
 
     public Order(int orderID, ArrayList<Product> products, Status eStatus, Boolean shipping, String date, Double totalPrice,String userEmail) {
         this.orderID = orderID;
         this.products = products;
         this.eStatus = eStatus;
-        this.shipping = shipping;
         this.date = date;
         this.userEmail = userEmail;
         this.totalPrice = totalPrice;
@@ -49,6 +47,7 @@ public class Order {
 
     public void addProduct(Product product){
         this.products.add(product);
+        this.totalPrice += product.getPrice();
     }
 
     public Status geteStatus() {
@@ -67,13 +66,6 @@ public class Order {
         this.userEmail = userEmail;
     }
 
-    public Boolean getShipping() {
-        return shipping;
-    }
-
-    public void setShipping(Boolean shipping) {
-        this.shipping = shipping;
-    }
 
     public String  getDate() {
         return date;
@@ -87,18 +79,6 @@ public class Order {
         return totalPrice;
     }
 
-    public void setTotalPrice() {
-        for (int i = 0; i < products.size() ; i++) {
-            this.totalPrice += products.get(i).getPrice();
-        }
-        if(shipping == true){
-            this.totalPrice += 30;
-        }
-    }
-
-
-
-
 
     @Override
     public String toString() {
@@ -106,7 +86,6 @@ public class Order {
                 "orderID=" + orderID +
                 ", products=" + products.size() +
                 ", eStatus=" + eStatus +
-                ", shipping='" + shipping + '\'' +
                 ", date=" + date +
                 ", totalPrice=" + totalPrice +
                 '}';
