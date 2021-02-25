@@ -17,7 +17,7 @@
             tools:context=".MainActivity"
             >
             <com.google.android.material.button.MaterialButton
-                android:id="@+id/history_BTN"
+                android:id="@+id/cart_BTN_history"
                 style="@style/Widget.MaterialComponents.ExtendedFloatingActionButton.Icon"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -32,7 +32,7 @@
                 android:textSize="20dp"
                 />
             <com.google.android.material.button.MaterialButton
-                android:id="@+id/current_BTN"
+                android:id="@+id/cart_BTN_current"
                 style="@style/Widget.MaterialComponents.ExtendedFloatingActionButton.Icon"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -52,8 +52,10 @@
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/products_LST"
             android:layout_width="wrap_content"
-            android:layout_height="290dp"
+            android:layout_height="wrap_content"
             android:layout_marginStart="4dp"
+            android:layout_marginTop="10dp"
+            android:layout_weight="1"
             android:layoutDirection="rtl"
             android:textDirection="rtl" />
 
@@ -62,10 +64,12 @@
             android:layout_height="wrap_content"
             android:background="@drawable/rounded"
             android:gravity="center_horizontal"
+            android:layout_marginBottom="@dimen/cardview_default_radius"
             android:layout_gravity="center_horizontal"
             android:layoutDirection="rtl"
-            android:padding="10dp"
-            android:orientation="vertical">
+            android:layout_marginTop="10dp"
+            android:orientation="vertical"
+            >
 
 
             <EditText

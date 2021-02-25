@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Fragment_Recipe">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            tools:context=".MainActivity"
+            >
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/history_BTN_history"
+                style="@style/Widget.MaterialComponents.ExtendedFloatingActionButton.Icon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="הזמנות קודמות"
+                android:layout_marginTop="20dp"
+                app:cornerRadius="17dp"
+                android:textColor="@color/white"
+                android:textStyle="bold"
+                android:layout_weight="4"
+                android:background="@drawable/rounded"
+                app:backgroundTint="@color/purple_200"
+                android:textSize="20dp"
+                />
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/history_BTN_current"
+                style="@style/Widget.MaterialComponents.ExtendedFloatingActionButton.Icon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="הזמנה נוכחית"
+                android:layout_marginTop="20dp"
+                app:cornerRadius="17dp"
+                android:textColor="@color/purple_200"
+                android:layout_weight="5"
+                android:textStyle="bold"
+                android:background="@drawable/rounded"
+                app:backgroundTint="@color/white"
+                android:textSize="20dp"
+
+                />
+        </LinearLayout>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/fragment_LST_history"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:layout_marginTop="10dp"
+            android:layout_weight="1"
+            android:layoutDirection="rtl"
+            android:textDirection="rtl" />
+
+
+    </LinearLayout>
+
+</RelativeLayout>

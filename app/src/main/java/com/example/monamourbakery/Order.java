@@ -49,6 +49,11 @@ public class Order {
         this.products.add(product);
         this.totalPrice += product.getPrice();
     }
+    public void removeProduct(int position){
+        double price = this.products.get(position).getPrice();
+        this.products.remove(position);
+        this.totalPrice -= price;
+    }
 
     public Status geteStatus() {
         return eStatus;
@@ -67,6 +72,7 @@ public class Order {
     }
 
 
+
     public String  getDate() {
         return date;
     }
@@ -79,6 +85,13 @@ public class Order {
         return totalPrice;
     }
 
+    public String printProducts(){
+        String productString = "";
+        for (int i = 0; i < products.size(); i++) {
+            productString += products.get(i).getPastry_name()+"\n";
+        }
+        return productString;
+    }
 
     @Override
     public String toString() {

@@ -125,9 +125,13 @@ public class Activity_Login extends AppCompatActivity {
                     User user = dataSnapshot.getValue(User.class);
                     if(user.getUserId().equals(firebaseUser.getUid().toString().trim())){
                         boolean isManager = false;
-                        if(user.getEmail().equals("mon_A_Bakery@gmail.com"))
+                        Intent intent;
+                        if(user.getEmail().equals("mon_A_Bakery@gmail.com")){
                             isManager = true;
-                        Intent intent = new Intent(Activity_Login.this, Activity_Main.class);
+                            intent = new Intent(Activity_Login.this, Activity_Main_Manager.class);
+                        }else{
+                            intent = new Intent(Activity_Login.this, Activity_Main.class);
+                        }
                         intent.putExtra("userId", ""+firebaseUser.getUid());
                         intent.putExtra("isManager", isManager);
                         intent.putExtra("CurrentUser",gson.toJson(user));

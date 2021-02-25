@@ -37,7 +37,9 @@ public class Activity_Main extends AppCompatActivity {
     private Fragment_AddSpecialProduct fragment_addSpecialProduct;
     private Fragment_Product fragment_product;
     private Fragment_Cart fragment_cart;
+    private Fragment_LastOrders fragment_lastOrders;
     public static boolean isManager;
+    public static boolean isCart;
 
     private BottomNavigationView bottomNav;
 
@@ -90,11 +92,31 @@ public class Activity_Main extends AppCompatActivity {
             db = FirebaseDatabase.getInstance().getReference("myUsers");
             db.child(user.getUserId()).setValue(user);
             db = FirebaseDatabase.getInstance().getReference("Orders");
-            db.child(user.getUserId()).child(""+currentOrder.getOrderID()).setValue(currentOrder);
+            db.child(""+currentOrder.getOrderID()).setValue(currentOrder);
             createOrder();
             fragment_addNewProduct = new Fragment_AddNewProduct();
             fragment_addNewProduct.setCallBack_add(callBack_add);
             fragment = fragment_addNewProduct;
+            loadFragment(fragment);
+        }
+
+        @Override
+        public void showOrdersHistory() {
+            fragment_lastOrders = new Fragment_LastOrders();
+            fragment_lastOrders.setCallBack_history(callBack_history);
+            fragment_lastOrders.setUser(user);
+            fragment = fragment_lastOrders;
+            loadFragment(fragment);
+        }
+    };
+
+    private CallBack_History callBack_history = new CallBack_History() {
+        @Override
+        public void showCurrentOrder() {
+            fragment_cart = new Fragment_Cart();
+            fragment_cart.setCallBack_order(callBack_order);
+            fragment_cart.setCurrentOrder(order);
+            fragment = fragment_cart;
             loadFragment(fragment);
         }
     };
@@ -106,6 +128,7 @@ public class Activity_Main extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         Log.d("pttt","isManager = "+getIntent().getBooleanExtra("isManager",false));
         isManager = getIntent().getBooleanExtra("isManager",false);
+        isCart = false;
         user = gson.fromJson(getIntent().getStringExtra("CurrentUser"),User.class);
         findViews();
         initViews();
@@ -173,16 +196,19 @@ public class Activity_Main extends AppCompatActivity {
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
             switch (item.getItemId()) {
                 case R.id.add:
+                    isCart=false;
                     fragment = fragment_addNewProduct;
                     loadFragment(fragment);
                     return true;
                 case R.id.recipes:
                     Log.d("pttt","mess");
+                    isCart=false;
                     fragment = new Fragment_Recipe();
                     loadFragment(fragment);
                     return true;
                 case R.id.cart:
                     Log.d("pttt","cart");
+                    isCart=true;
                     fragment_cart = new Fragment_Cart();
                     fragment_cart.setCurrentOrder(order);
                     fragment_cart.setCallBack_order(callBack_order);

@@ -49,6 +49,19 @@ public class Product_Adapter extends RecyclerView.Adapter<com.example.monamourba
                 .centerCrop()
                 .into(holder.product_IMG);
 
+        if(!Activity_Main.isManager){
+            holder.product_BTN_delete.setVisibility(View.INVISIBLE);
+            if(Activity_Main.isCart)
+                holder.product_BTN_delete.setVisibility(View.VISIBLE);
+        }
+        holder.product_BTN_delete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(mClickListener!=null){
+                    mClickListener.onDeleteItemClicked(v,product);
+                }
+            }
+        });
         holder.product_BTN_readMore.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -79,6 +92,7 @@ public class Product_Adapter extends RecyclerView.Adapter<com.example.monamourba
     public interface MyItemClickListener {
         void onItemClick(View view, int position);
         void onReadMoreClicked(View view, Product product);
+        void onDeleteItemClicked(View view,Product product);
     }
 
 
@@ -91,6 +105,7 @@ public class Product_Adapter extends RecyclerView.Adapter<com.example.monamourba
         TextView product_LBL_short_description;
         ShapeableImageView product_IMG;
         MaterialButton product_BTN_readMore;
+        MaterialButton product_BTN_delete;
 
         MyViewHolder(View itemView) {
             super(itemView);
@@ -99,6 +114,7 @@ public class Product_Adapter extends RecyclerView.Adapter<com.example.monamourba
             product_LBL_short_description = itemView.findViewById(R.id.product_LBL_short_description);
             product_IMG = itemView.findViewById(R.id.product_IMG);
             product_BTN_readMore = itemView.findViewById(R.id.product_BTN_readMore);
+            product_BTN_delete = itemView.findViewById(R.id.product_BTN_delete);
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override

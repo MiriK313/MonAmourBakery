@@ -11,7 +11,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.MonAmourBakery">
-        <activity android:name=".Activity_SignUp"></activity>
+        <activity android:name=".Activity_Main_Manager"></activity>
+        <activity android:name=".Activity_SignUp" />
         <activity android:name=".Activity_Splash">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -26,8 +27,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Activity_Main">
-        </activity>
+        <activity android:name=".Activity_Main"></activity>
     </application>
 
 </manifest>

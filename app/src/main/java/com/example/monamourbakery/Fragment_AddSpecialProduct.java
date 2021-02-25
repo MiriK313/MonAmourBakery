@@ -62,6 +62,7 @@ public class Fragment_AddSpecialProduct extends Fragment_Base {
     private void initViews(View view) {
 
 //        defineDefaultProduct(view);
+        updatePrice();
         special_type_RDG.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
 
             @Override
@@ -82,10 +83,10 @@ public class Fragment_AddSpecialProduct extends Fragment_Base {
                     setDRP(R.raw.pack_types,R.raw.pack_flavors,R.raw.pack_sizes);
                     product.setType(Type.PACK);
                 }
-
+                updatePrice();
             }
         });
-
+        updatePrice();
         special_kosher_RDG.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged (RadioGroup group,int checkedId){
@@ -98,10 +99,9 @@ public class Fragment_AddSpecialProduct extends Fragment_Base {
                     Log.d("DDM", "Institute: fur");
                     product.setKosher(Kosher.FUR);
                 }
-
+                updatePrice();
             }
         });
-
         updatePrice();
         special_continue_BTN.setOnClickListener(new View.OnClickListener() {
             @Override

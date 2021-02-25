@@ -28,12 +28,13 @@ import java.util.Date;
 
 public class Fragment_Cart extends Fragment_Base{
     public RecyclerView products_LST;
-    private boolean flagChose = false;
     private DatePickerDialog datePickerDialog;
     private EditText date_EDT;
     //price
     private TextView total_price_orders_LBL;
     private MaterialButton pay_orders_BTN;
+    //Buttons
+    private MaterialButton cart_BTN_history;
 
     private CallBack_Order callBack_order;
     private Order currentOrder;
@@ -59,14 +60,22 @@ public class Fragment_Cart extends Fragment_Base{
         product_adapter.setClickListener(new Product_Adapter.MyItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {
-                Toast.makeText(view.getContext(), currentOrder.getProducts().get(position).getPastry_name(), Toast.LENGTH_SHORT).show();
-
-
+                Toast.makeText(view.getContext(),
+                        currentOrder.getProducts().get(position).getPastry_name(),
+                        Toast.LENGTH_SHORT).show();
             }
 
             @Override
             public void onReadMoreClicked(View view, Product product) {
                 openInfo(product,view);
+            }
+
+            @Override
+            public void onDeleteItemClicked(View view,Product product){
+                int position = currentOrder.getProducts().indexOf(product);
+                currentOrder.removeProduct(position);
+                product_adapter.notifyItemRemoved(position);
+                updatePrice();
             }
         });
         ;
@@ -122,15 +131,24 @@ public class Fragment_Cart extends Fragment_Base{
             }
         });
 
+        cart_BTN_history.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(callBack_order != null){
+                    callBack_order.showOrdersHistory();
+                }
+            }
+        });
+
     }
 
     private void updatePrice() {
-        if(checkOrder(currentOrder)== true)
+        if(currentOrder.getProducts().size()>=0)
             total_price_orders_LBL.setText("לתשלום: "+currentOrder.getTotalPrice());
     }
 
     private boolean checkGui() {
-        if(flagChose==false || date_EDT.getText().toString().isEmpty() )
+        if( date_EDT.getText().toString().isEmpty() )
             return false;
         return true;
     }
@@ -148,6 +166,7 @@ public class Fragment_Cart extends Fragment_Base{
         date_EDT=(EditText) view.findViewById(R.id.date_EDT);
         total_price_orders_LBL=view.findViewById(R.id.total_price_orders_LBL);
         pay_orders_BTN= (MaterialButton) view.findViewById(R.id.pay_orders_BTN);
+        cart_BTN_history = view.findViewById(R.id.cart_BTN_history);
 
     }
     private void openInfo(Product product,View view) {

@@ -46,8 +46,15 @@ public class Fragment_Product extends Fragment_Base {
             public void onReadMoreClicked(View view, Product product) {
                 openInfo(product,view);
             }
+
+            @Override
+            public void onDeleteItemClicked(View view,Product product){
+                int position = products.indexOf(product);
+                products.remove(position);
+                product_adapter.notifyItemRemoved(position);
+            }
         });
-        ;
+
 
         fragment_products_LST.setLayoutManager(new LinearLayoutManager(view.getContext()));
         fragment_products_LST.setAdapter(product_adapter);
