@@ -17,6 +17,9 @@ public class Fragment_AddNewRecipe extends Fragment_Base_Manager{
     public static final int MIN_STRING_LENGTH=5;
     private EditText cake_name_EDT;
     private EditText short_description_EDT;
+    private String cakeNameInput;
+    private String descriptionInput;
+    private String shortDescriptionInput;
     private AutoCompleteTextView ingredient_DRP;
     private AutoCompleteTextView sizes_DRP;
     private AutoCompleteTextView amounts_DRP;
@@ -40,14 +43,6 @@ public class Fragment_AddNewRecipe extends Fragment_Base_Manager{
     }
 
     private void initViews(View view) {
-
-        if(cake_name_EDT.getText().toString()!=null && cake_name_EDT.getText().toString().length()>MIN_STRING_LENGTH){
-            recipe.setPastry_name(cake_name_EDT.getText().toString().trim());
-        }
-        if(short_description_EDT.getText().toString()!=null && short_description_EDT.getText().toString().length()>MIN_STRING_LENGTH){
-            recipe.setShort_description(short_description_EDT.getText().toString().trim());
-        }
-
         kosher_RDG.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged (RadioGroup group,int checkedId){
@@ -62,7 +57,6 @@ public class Fragment_AddNewRecipe extends Fragment_Base_Manager{
                 }
             }
         });
-
         setDRP(R.raw.ingredians, R.raw.sizes, R.raw.amounts);
         add_new_ingredient_BTN.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -72,29 +66,37 @@ public class Fragment_AddNewRecipe extends Fragment_Base_Manager{
 
             }
         });
-
-        if(description_EDT.getText().toString()!=null && description_EDT.getText().toString().length()>MIN_STRING_LENGTH){
-            recipe.setDescription(description_EDT.getText().toString().trim());
-        }
-
         add_recipe_BTN.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if(callBack_recipe_add!=null){
-                    if(checkRecipe(recipe) == true){
-                        Log.d("pttt",recipe.toString());
-                        recipe.setPastry_img("");
-                        callBack_recipe_add.addRecipe(recipe);
+                    if(checkEditText(v)){
+                        if(checkRecipe(recipe)){
+                            Log.d("pttt",recipe.toString());
+                            recipe.setPastry_img("");
+                            callBack_recipe_add.addRecipe(recipe);
+                        }
                     }
                     else{
                         Toast.makeText(v.getContext(), "Please Fill All Fields!!", Toast.LENGTH_SHORT).show();
                     }
-
-
                 }
             }
         });
+    }
 
+    private boolean checkEditText(View view) {
+        cakeNameInput = cake_name_EDT.getText().toString().trim();
+        shortDescriptionInput = short_description_EDT.getText().toString().trim();
+        descriptionInput = description_EDT.getText().toString().trim();
+        if (cakeNameInput.length()==0 || shortDescriptionInput.length()==0 || descriptionInput.length()==0){
+            Toast.makeText(view.getContext(), "Please Fill Name/Descriptions", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+        recipe.setPastry_name(cakeNameInput);
+        recipe.setShort_description(shortDescriptionInput);
+        recipe.setDescription(descriptionInput);
+        return true;
     }
 
     private boolean checkRecipe(Recipe recipe) {

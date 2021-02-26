@@ -52,7 +52,7 @@
             android:ems="30"
             android:gravity="center"
             android:inputType="textPersonName"
-            android:text="שם העוגה" />
+            android:hint="שם העוגה" />
 
         <EditText
             android:id="@+id/short_description_EDT"
@@ -61,7 +61,7 @@
             android:ems="100"
             android:gravity="center"
             android:inputType="textPersonName"
-            android:text="תיאור קצר" />
+            android:hint="תיאור קצר" />
 
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/add_new_ingredient_LBL"

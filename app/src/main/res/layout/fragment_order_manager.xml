@@ -18,7 +18,7 @@
         android:background="#A4E6D1F3"
         android:textDirection="rtl">
         <TextView
-            android:id="@+id/history_TXT_order_number"
+            android:id="@+id/manager_TXT_order_number"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="12dp"
@@ -31,33 +31,44 @@
             android:textColor="@color/purple_700" />
 
         <TextView
-            android:id="@+id/history_TXT_order_price"
+            android:id="@+id/manager_TXT_order_price"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/history_TXT_order_number"
-            android:layout_alignStart="@id/history_TXT_order_number"
+            android:layout_below="@+id/manager_TXT_order_number"
+            android:layout_alignStart="@id/manager_TXT_order_number"
             android:layout_marginTop="4dp"
             android:text="שולם:"
             android:textColor="@color/black"
             android:textSize="12sp" />
 
         <TextView
-            android:id="@+id/history_TXT_order_status"
+            android:id="@+id/manager_TXT_order_userMail"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/history_TXT_order_price"
-            android:layout_alignStart="@id/history_TXT_order_number"
+            android:layout_below="@+id/manager_TXT_order_price"
+            android:layout_alignStart="@id/manager_TXT_order_number"
             android:layout_marginTop="4dp"
             android:text="מייל המזמין:"
             android:textColor="@color/black"
             android:textSize="12sp" />
 
         <TextView
-            android:id="@+id/history_TXT_order_date"
+            android:id="@+id/manager_TXT_order_status"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/history_TXT_order_status"
-            android:layout_alignStart="@id/history_TXT_order_number"
+            android:layout_below="@+id/manager_TXT_order_userMail"
+            android:layout_alignStart="@id/manager_TXT_order_number"
+            android:layout_marginTop="4dp"
+            android:text="סטטוס:"
+            android:textColor="@color/black"
+            android:textSize="12sp" />
+
+        <TextView
+            android:id="@+id/manager_TXT_order_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/manager_TXT_order_status"
+            android:layout_alignStart="@id/manager_TXT_order_number"
             android:layout_marginTop="4dp"
             android:layout_marginEnd="12dp"
             android:ellipsize="end"
@@ -68,11 +79,11 @@
             android:textDirection="rtl"/>
 
         <com.google.android.material.button.MaterialButton
-            android:id="@+id/history_TXT_readMore"
+            android:id="@+id/manager_TXT_readMore"
             style="@style/Widget.MaterialComponents.Button.TextButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/history_TXT_order_date"
+            android:layout_below="@+id/manager_TXT_order_date"
             android:insetTop="0dp"
             android:insetBottom="0dp"
             android:minWidth="10dp"

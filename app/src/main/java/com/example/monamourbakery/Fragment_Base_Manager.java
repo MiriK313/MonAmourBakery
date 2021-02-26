@@ -29,6 +29,7 @@ public class Fragment_Base_Manager extends Fragment_Base {
                 else if(resourceFile == R.raw.amounts ){
                     amount=selected;
                 }
+                Log.d("DDM", "checker: " + ingredient+","+size+","+amount);
                 if(ingredient!=null && size!=null &&amount!=null){
                     recipe.addIngredient(amount+" "+size,ingredient);
                 }

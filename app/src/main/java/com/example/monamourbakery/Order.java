@@ -63,6 +63,13 @@ public class Order {
         this.eStatus = eStatus;
     }
 
+    public void changeStatus(){
+        if(this.eStatus== Status.WAITING)
+            seteStatus(Status.ACCEPTED);
+        else
+            seteStatus(Status.WAITING);
+    }
+
     public String getUserEmail() {
         return userEmail;
     }

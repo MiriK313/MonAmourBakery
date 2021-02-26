@@ -54,6 +54,10 @@ public class Product_Adapter extends RecyclerView.Adapter<com.example.monamourba
             if(Activity_Main.isCart)
                 holder.product_BTN_delete.setVisibility(View.VISIBLE);
         }
+
+        if(Activity_Main_Manager.isManager)
+            holder.product_BTN_delete.setVisibility(View.VISIBLE);
+
         holder.product_BTN_delete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

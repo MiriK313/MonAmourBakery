@@ -43,14 +43,10 @@ public class Fragment_Recipe extends Fragment_Base {
         recipes = RecipeMockDB.generateRecipes();
         findMoreFromFireBase(view);
         updateAdapter(view);
-//        Log.d("pttt",  recipes.toArray().toString());
-
-
         return view;
     }
 
     private void findMoreFromFireBase(View view) {
-        FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
         DatabaseReference db = FirebaseDatabase.getInstance().getReference();
         db.child("Recipes").addValueEventListener(new ValueEventListener() {
             @Override
@@ -58,7 +54,8 @@ public class Fragment_Recipe extends Fragment_Base {
                 Log.d("DDM1",""+snapshot.getChildren().getClass().getName());
                 for( DataSnapshot dataSnapshot : snapshot.getChildren()){
                     Recipe recipe = dataSnapshot.getValue(Recipe.class);
-                    recipes.add(recipe);
+                    if(!checkIfExist(recipe))
+                        recipes.add(recipe);
                     updateAdapter(view);
                     Log.d("DDM1",recipe.toString());
                 }
@@ -69,6 +66,16 @@ public class Fragment_Recipe extends Fragment_Base {
             }
         });
     }
+
+    private boolean checkIfExist(Recipe recipe) {
+        for (int i = 0; i < recipes.size(); i++) {
+            if(recipe.getPastry_name().equals(recipes.get(i).getPastry_name()) ){
+                return true;
+            }
+        }
+        return false;
+    }
+
 
     private void updateAdapter(View view) {
         //Adapter
@@ -88,8 +95,9 @@ public class Fragment_Recipe extends Fragment_Base {
             public void onRemove(View view, Recipe recipe) {
                 int position = recipes.indexOf(recipe);
                 recipes.remove(position);
+                DatabaseReference db = FirebaseDatabase.getInstance().getReference("Recipes");
+                db.child(""+recipe.getPastry_name()).removeValue();
                 recipe_adapter.notifyItemRemoved(position);
-
             }
         });
 

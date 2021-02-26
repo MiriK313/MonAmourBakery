@@ -30,6 +30,7 @@
         app:icon="@drawable/add"
         app:iconSize="30dp"
         app:iconTint="@color/purple_700"
-        app:iconGravity="textStart" />
+        app:iconGravity="textStart"
+        android:visibility="invisible"/>
 
 </RelativeLayout>

@@ -27,7 +27,8 @@ public class Activity_Main_Manager extends AppCompatActivity {
     private FragmentManager fragment_manager;
     private Fragment_Base fragment;
     private Fragment_Product fragment_product;
-    private Fragment_Cart fragment_cart;
+    private Fragment_AddSpecialProduct fragment_addSpecialProduct;
+    private Fragment_ManagerOrders fragment_managerOrders;
     private Fragment_Recipe fragment_recipe;
     private Fragment_AddNewRecipe fragment_addNewRecipe;
     private BottomNavigationView bottomNav;
@@ -41,7 +42,7 @@ public class Activity_Main_Manager extends AppCompatActivity {
             fragment_recipe = new Fragment_Recipe();
             fragment_recipe.setCallBack_recipe(callBack_recipe);
             fragment = fragment_recipe;
-            loadFragment(fragment);
+            loadFragment(fragment_recipe);
 
         }
     };
@@ -50,10 +51,34 @@ public class Activity_Main_Manager extends AppCompatActivity {
         public void addRecipeWindow() {
             fragment_addNewRecipe = new Fragment_AddNewRecipe();
             fragment_addNewRecipe.setCallBack_recipe_add(callBack_recipe_add);
-            fragment = fragment_addNewRecipe;
-            loadFragment(fragment);
+            loadFragment(fragment_addNewRecipe);
         }
     };
+
+    private CallBack_Product callBack_product = new CallBack_Product() {
+        @Override
+        public void addProductWindow() {
+            fragment_addSpecialProduct = new Fragment_AddSpecialProduct();
+            fragment_addSpecialProduct.setCallBack_special(callBack_special);
+            loadFragment(fragment_addSpecialProduct);
+        }
+    };
+
+    private CallBack_Special callBack_special = new CallBack_Special() {
+        @Override
+        public void addSpecial(Product product) {
+            Toast.makeText(Activity_Main_Manager.this, "Product has been Added to DB!", Toast.LENGTH_SHORT).show();
+            db = FirebaseDatabase.getInstance().getReference("Products");
+            db.child(""+product.getPastry_name()).setValue(product);
+            fragment_product = new Fragment_Product();
+            fragment_product.setCallBack_product(callBack_product);
+            fragment = fragment_product;
+            loadFragment(fragment_product);
+        }
+    };
+
+
+
 
 
 
@@ -74,8 +99,9 @@ public class Activity_Main_Manager extends AppCompatActivity {
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 switch (item.getItemId()) {
                     case R.id.products:
-                        fragment = fragment_product;
-                        loadFragment(fragment);
+                        fragment_product = new Fragment_Product();
+                        fragment_product.setCallBack_product(callBack_product);
+                        loadFragment(fragment_product);
                         return true;
                     case R.id.recipes:
                         Log.d("pttt", "mess");
@@ -84,11 +110,8 @@ public class Activity_Main_Manager extends AppCompatActivity {
                         return true;
                     case R.id.cart:
                         Log.d("pttt", "cart");
-//                            fragment_cart = new Fragment_Cart();
-//                            fragment_cart.setCurrentOrder(order);
-//                            fragment_cart.setCallBack_order(callBack_order);
-//                            fragment = fragment_cart;
-//                            loadFragment(fragment);
+                        fragment_managerOrders = new Fragment_ManagerOrders();
+                        loadFragment(fragment_managerOrders);
                         return true;
                 }
                 return false;
@@ -112,8 +135,6 @@ public class Activity_Main_Manager extends AppCompatActivity {
 
         private void findViews() {
             fragment_manager = getFragmentManager();
-            fragment_product = new Fragment_Product();
-            fragment_cart = new Fragment_Cart();
             fragment_recipe = new Fragment_Recipe();
             fragment_recipe.setCallBack_recipe(callBack_recipe);
             fragment = fragment_recipe;
