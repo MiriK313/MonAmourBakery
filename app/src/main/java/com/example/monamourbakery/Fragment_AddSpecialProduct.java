@@ -109,7 +109,7 @@ public class Fragment_AddSpecialProduct extends Fragment_Base {
                 if(callBack_special!=null){
                     if(checkProduct(product) == true){
                         Log.d("pttt",product.toString());
-                        product.setPastry_img("");
+                        product.setPastry_img(" ");
                         Toast.makeText(v.getContext(), "Product has been Added!!", Toast.LENGTH_SHORT).show();
 
                         callBack_special.addSpecial(product);

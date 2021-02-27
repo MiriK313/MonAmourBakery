@@ -2,13 +2,20 @@ package com.example.monamourbakery;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
 
+import android.Manifest;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
+import android.content.ContentValues;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.CalendarContract;
 import android.util.Log;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.Toast;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -25,7 +32,7 @@ import java.util.ArrayList;
 import java.util.Random;
 
 public class Activity_Main extends AppCompatActivity {
-
+    
     private Gson gson = new Gson();
     private FirebaseAuth mAuth;
     private DatabaseReference db;
@@ -229,7 +236,6 @@ public class Activity_Main extends AppCompatActivity {
         fragmentTransaction.commit(); // save the changes
 
     }
-
 
 
 }

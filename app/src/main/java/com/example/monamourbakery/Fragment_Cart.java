@@ -1,7 +1,12 @@
 package com.example.monamourbakery;
 
+import android.Manifest;
 import android.app.DatePickerDialog;
+import android.content.ContentValues;
+import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.CalendarContract;
 import android.text.InputType;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -15,6 +20,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AlertDialog;
+import androidx.core.app.ActivityCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -177,5 +183,6 @@ public class Fragment_Cart extends Fragment_Base{
                 .setPositiveButton("סגור", null)
                 .show();
     }
+
 
 }

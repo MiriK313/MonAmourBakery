@@ -3,6 +3,8 @@
     package="com.example.monamourbakery">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
     <application
         android:allowBackup="true"
@@ -11,7 +13,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.MonAmourBakery">
-        <activity android:name=".Activity_Main_Manager"></activity>
+        <activity android:name=".Activity_UploadPhoto"></activity>
+        <activity android:name=".Activity_Main_Manager" />
         <activity android:name=".Activity_SignUp" />
         <activity android:name=".Activity_Splash">
             <intent-filter>
@@ -27,7 +30,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Activity_Main"></activity>
+        <activity android:name=".Activity_Main" />
     </application>
 
 </manifest>
