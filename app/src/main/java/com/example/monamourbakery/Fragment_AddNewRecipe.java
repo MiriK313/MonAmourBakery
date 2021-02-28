@@ -14,7 +14,6 @@ import com.google.android.material.button.MaterialButton;
 
 public class Fragment_AddNewRecipe extends Fragment_Base_Manager{
 
-    public static final int MIN_STRING_LENGTH=5;
     private EditText cake_name_EDT;
     private EditText short_description_EDT;
     private String cakeNameInput;

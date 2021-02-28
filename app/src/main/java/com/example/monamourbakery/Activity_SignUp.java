@@ -130,9 +130,4 @@ public class Activity_SignUp extends AppCompatActivity {
         signUp_LBL_EDT = findViewById(R.id.signUp_LBL_EDT);
     }
 
-//    @Override
-//    protected void onDestroy() {
-//        super.onDestroy();
-//        FirebaseAuth.getInstance().signOut();
-//    }
 }

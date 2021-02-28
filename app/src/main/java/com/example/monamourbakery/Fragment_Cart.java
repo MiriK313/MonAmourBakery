@@ -54,12 +54,8 @@ public class Fragment_Cart extends Fragment_Base{
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_current_order, container, false);
-        // special_product=new Product();
-        //date_EDT.setInputType(InputType.TYPE_NULL);
         findViews(view);
         initViews(view);
-
-//        Log.d("pttt",  recipes.toArray().toString());
 
         //Adapter
         Product_Adapter product_adapter = new Product_Adapter(view.getContext(), currentOrder.getProducts());
@@ -108,7 +104,6 @@ public class Fragment_Cart extends Fragment_Base{
                             @Override
                             public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
                                 if(checkDate(dayOfMonth,monthOfYear, yearC ,day,month,year) == true){
-//                                    dayOfMonth>day &&  (monthOfYear + 1)>=month && year>=yearC;
                                     date_EDT.setText(dayOfMonth + "/" + (monthOfYear + 1) + "/" + year);
                                     Log.d("DDM", "Date: "+date_EDT.getText());
                                     currentOrder.setDate(date_EDT.getText().toString().trim());

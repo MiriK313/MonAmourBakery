@@ -68,8 +68,6 @@ public class ProductMockDB {
         product6.setType(Type.CAKE);
         product6.setSize(Size.M);
         products.add(product6);
-        //Log.d("pttt", products.get(1).toString());
-
 
         return products;
     }

@@ -19,7 +19,6 @@ public class Recipe extends Pastry {
     public String toString_Ingredients() {
         String st = "";
         for (String key: ingredients.keySet()){
-            //System.out.println(key + " " + ingredients.get(key));
             st = st + key + " " + ingredients.get(key)+"\n";
         }
         return st;

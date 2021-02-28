@@ -71,20 +71,12 @@ public class Activity_Main_Manager extends AppCompatActivity {
             Toast.makeText(Activity_Main_Manager.this, "Product has been Added to DB!", Toast.LENGTH_SHORT).show();
             db = FirebaseDatabase.getInstance().getReference("Products");
             db.child(""+product.getPastry_name()).setValue(product);
-//            fragment_product = new Fragment_Product();
-//            fragment_product.setCallBack_product(callBack_product);
-//            fragment = fragment_product;
-//            loadFragment(fragment_product);
             Intent intent = new Intent(Activity_Main_Manager.this, Activity_UploadPhoto.class);
             intent.putExtra("currentProduct",product.getPastry_name());
             startActivity(intent);
             finish();
         }
     };
-
-
-
-
 
 
         @Override
