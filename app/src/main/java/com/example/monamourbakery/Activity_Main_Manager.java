@@ -110,8 +110,9 @@ public class Activity_Main_Manager extends AppCompatActivity {
                         return true;
                     case R.id.recipes:
                         Log.d("pttt", "mess");
-                        fragment = new Fragment_Recipe();
-                        loadFragment(fragment);
+                        fragment_recipe = new Fragment_Recipe();
+                        fragment_recipe.setCallBack_recipe(callBack_recipe);
+                        loadFragment(fragment_recipe);
                         return true;
                     case R.id.cart:
                         Log.d("pttt", "cart");

@@ -167,7 +167,7 @@
             android:ems="100"
             android:gravity="center"
             android:inputType="textPersonName"
-            android:text="אופן הכנה" />
+            android:hint="אופן הכנה" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/add_recipe_BTN"
