@@ -168,12 +168,12 @@ public class Activity_UploadPhoto extends AppCompatActivity {
             }).addOnCompleteListener(new OnCompleteListener<Uri>() {
                 @Override
                 public void onComplete(@NonNull Task<Uri> task) {
-
+                    Log.d("DDMComplete",imageUri.getPath().toString().trim());
                     if(task.isSuccessful()){
                         isSuccess = true;
                         downloadUri = task.getResult();
                         String mUri = downloadUri.toString();
-//                        Glide.with(Activity_Photo.this).load(mUri).into(image_IMG_user);
+                     //Glide.with(Activity_Photo.this).load(mUri).into(image_IMG_user);
                         Toast.makeText(Activity_UploadPhoto.this, "Photo Chose!", Toast.LENGTH_SHORT).show();
                         progressDialog.dismiss();
                     }else {
@@ -198,10 +198,14 @@ public class Activity_UploadPhoto extends AppCompatActivity {
 
         if (requestCode == IMAGE_REQUEST && resultCode == RESULT_OK && data != null && data.getData() != null) {
             imageUri = data.getData();
+            Log.d("DDM",imageUri.getPath().toString().trim());
             if (uploadTask != null && uploadTask.isInProgress())
                 Toast.makeText(Activity_UploadPhoto.this, "Upload In Progress..", Toast.LENGTH_SHORT).show();
-            else
+            else{
+                Log.d("DDMElse",imageUri.getPath().toString().trim());
                 uploadImage();
+
+            }
 
         }
     }
