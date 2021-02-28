@@ -91,7 +91,7 @@ public class Fragment_Base extends Fragment {
                     Log.d("DDM", "Institute: Name "+product.getPastry_name());
                 }
                 else if(resourceFile==R.raw.cake_flavors ||resourceFile==R.raw.pack_flavors){
-                    product.setShort_description(product.getShort_description()+", "+selected);
+                    product.setShort_description(selected);
                     Log.d("DDM", "Institute: flavors "+product.getShort_description());
                 }
             }

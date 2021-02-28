@@ -43,9 +43,10 @@ public class Order_Adapter extends RecyclerView.Adapter<com.example.monamourbake
     public void onBindViewHolder(com.example.monamourbakery.Order_Adapter.MyViewHolder holder, int position) {
         Log.d("pttt", "Position = " + position);
         Order order = orders.get(position);
-        holder.history_TXT_order_number.setText(""+order.getOrderID());
+        holder.history_TXT_order_number.setText("מספר הזמנה : "+order.getOrderID());
         holder.history_TXT_order_price.setText("" + order.getTotalPrice());
         holder.history_TXT_order_status.setText(order.geteStatus().name());
+        holder.history_TXT_order_date.setText(order.getDate());
 
 
         holder.history_TXT_readMore.setOnClickListener(new View.OnClickListener() {

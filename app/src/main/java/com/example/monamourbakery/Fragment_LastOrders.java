@@ -62,7 +62,7 @@ public class Fragment_LastOrders extends Fragment_Base{
             @Override
             public void onItemClick(View view, int position) {
                 Toast.makeText(view.getContext(),
-                        orders.get(position).getOrderID(),
+                        "הזמנה מס' "+orders.get(position).getOrderID(),
                         Toast.LENGTH_SHORT).show();
             }
 

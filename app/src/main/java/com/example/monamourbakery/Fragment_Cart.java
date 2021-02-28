@@ -101,13 +101,14 @@ public class Fragment_Cart extends Fragment_Base{
                 final Calendar cldr = Calendar.getInstance();
                 int day = cldr.get(Calendar.DAY_OF_MONTH);
                 int month = cldr.get(Calendar.MONTH);
-                int year = cldr.get(Calendar.YEAR);
+                int yearC = cldr.get(Calendar.YEAR);
                 // date picker dialog
                 datePickerDialog = new DatePickerDialog(v.getContext(),
                         new DatePickerDialog.OnDateSetListener() {
                             @Override
                             public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
-                                if(dayOfMonth>day &&  (monthOfYear + 1)>=month && year>=year){
+                                if(checkDate(dayOfMonth,monthOfYear, yearC ,day,month,year) == true){
+//                                    dayOfMonth>day &&  (monthOfYear + 1)>=month && year>=yearC;
                                     date_EDT.setText(dayOfMonth + "/" + (monthOfYear + 1) + "/" + year);
                                     Log.d("DDM", "Date: "+date_EDT.getText());
                                     currentOrder.setDate(date_EDT.getText().toString().trim());
@@ -116,7 +117,7 @@ public class Fragment_Cart extends Fragment_Base{
                                 }
 
                             }
-                        }, year, month, day);
+                        }, yearC, month, day);
                 datePickerDialog.show();
             }
         });
@@ -146,6 +147,20 @@ public class Fragment_Cart extends Fragment_Base{
             }
         });
 
+    }
+
+    private boolean checkDate(int dayOfMonth, int monthOfYear, int year, int day, int month, int yearC) {
+        if(year > yearC)
+            return true;
+        else{
+            if(year == yearC && monthOfYear>month)
+                return true;
+            else{
+                if(year == yearC && monthOfYear==month && dayOfMonth>day)
+                    return true;
+            }
+        }
+        return false;
     }
 
     private void updatePrice() {

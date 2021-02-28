@@ -46,7 +46,7 @@ public class ProductMockDB {
         product4.setShort_description("מוס אוריאו עם תחתית עוגיות אוריאו וגנאש שוקולד");
         product4.setKosher(Kosher.MILK);
         product4.setPastry_img("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRDDDnZChv2GikszsYb8ccAubuT7ecNCYCogQ&usqp=CAU");
-        product4.setPrice(50);
+        product4.setPrice(380);
         product4.setType(Type.CAKE);
         product4.setSize(Size.M);
         products.add(product4);
@@ -55,7 +55,7 @@ public class ProductMockDB {
         product5.setShort_description("עוגת לוטוב עם מוס שוקולד לבן ומסקרפונה עם שכבת קראנץ קורנפלקס מצופה לוטוס");
         product5.setKosher(Kosher.MILK);
         product5.setPastry_img("https://www.metukimsheli.com/wp-content/uploads/2016/06/%D7%A2%D7%95%D7%92%D7%AA-%D7%9E%D7%A1%D7%A7%D7%A8%D7%A4%D7%95%D7%A0%D7%94-%D7%95%D7%9C%D7%95%D7%98%D7%95%D7%A1-%D7%A7%D7%A4%D7%95%D7%90%D7%942.jpg");
-        product5.setPrice(50);
+        product5.setPrice(320);
         product5.setType(Type.CAKE);
         product5.setSize(Size.M);
         products.add(product5);
@@ -64,7 +64,7 @@ public class ProductMockDB {
         product6.setShort_description("מארז משולשים מיקס במגוון טעמים לבחירה");
         product6.setKosher(Kosher.MILK);
         product6.setPastry_img("https://www.getcake.co.il/images/uploads/thumbnails/2234_1583268120_183363_620_100.jpg");
-        product6.setPrice(50);
+        product6.setPrice(280);
         product6.setType(Type.CAKE);
         product6.setSize(Size.M);
         products.add(product6);
